@@ -1,0 +1,95 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Registration</h4>
+    </div>
+    <div class="modal-body">
+        <form id="regFrm" action="javascript:void(0)" class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend></legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="email">E-mail:</label>  
+                    <div class="col-md-5">
+                        <input id="email" name="email" type="email" placeholder="enter your e-mail address" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="regUsername">Username:</label>  
+                    <div class="col-md-5">
+                        <input id="regUsername" name="regUsername" type="text" placeholder="enter your user name" class="form-control input-md" required="">
+                        <span class="help-block">Username can contain any letters or numbers, without spaces</span>  
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="regFirstname">First Name:</label>  
+                    <div class="col-md-5">
+                        <input id="regFirstname" name="regFirstname" type="text" placeholder="enter your first name" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="regLastname">Last Name:</label>  
+                    <div class="col-md-5">
+                        <input id="regLastname" name="regLastname" type="text" placeholder="enter your last name" class="form-control input-md">
+
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="regPassword">Password:</label>
+                    <div class="col-md-5">
+                        <input id="regPassword" name="regPassword" type="password" placeholder="" class="form-control input-md" required="">
+                        <span class="help-block">Password should be at least 4 characters</span>
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="regConfrimPass">Password (Confirm):</label>
+                    <div class="col-md-5">
+                        <input id="regConfrimPass" name="regConfrimPass" type="password" placeholder="" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="regClearBtn"></label>
+                    <div class="col-md-8">
+                        <input type="reset" id="regClearBtn" name="regClearBtn" class="btn btn-primary" value="Clear" />
+                        <input type="submit" id="registerBrn" name="registerBrn" class="btn btn-primary" value="Register" />
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+</div>
+<script>
+    $(document).ready(function() {
+        $("#regFrm").submit(function() {
+            if ($("#regPassword").val() && ($("#regPassword").val() === $("#regConfrimPass").val())) {
+                alert("You have successfully registered. \n" +
+                        "Please try to login with your credentials.");
+                $("#regModal").modal("hide");
+                $("a[data-target='#loginModal']").trigger('click', true);
+
+            }
+        });
+
+    });
+</script>

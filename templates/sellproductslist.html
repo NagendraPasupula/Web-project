@@ -1,0 +1,54 @@
+<div id="blog" class="row"> 
+    <div class="row">
+        <div class="col-md-8 col-md-offset-4">
+            <h3>Selling products list</h3>
+        </div>
+    </div>
+    <hr>
+
+    <div class="col-md-8 col-md-offset-2 classFixNow margin-bottom-15">
+        <div class="col-md-12 blogShort iphoneadded" style="display: none;">
+            <img style="width: 75px; height: 75px;" src="img/electronics/iphone4s.JPG" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <p>Apple iPhone 4s - 16GB - Black (Sprint) Smartphone Great Condition</p>
+            <a class="btn btn-primary pull-right marginBottom10" href="javascript:void(0)" id="editProdBtn">Edit</a> 
+        </div>
+        <div class="col-md-12 blogShort">
+            <img style="width: 75px; height: 75px;" src="img/electronics/samsungduos.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <article>Samsung Galaxy Duos Lates Version Kitkat</article>
+            <a class="btn btn-primary pull-right marginBottom10" href="javascript:void(0)">Edit</a> 
+        </div>
+        <div class="col-md-12 blogShort">
+            <img style="width: 75px; height: 75px;" src="img/electronics/blackberrr.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <article>Blackberry i2I5 - Smartphone</article>
+            <a class="btn btn-primary pull-right marginBottom10" href="javascript:void(0)">Edit</a> 
+        </div>
+        <div class="col-md-12 blogShort">
+            <img style="width: 75px; height: 75px;" src="img/electronics/xperiaz.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <article>Sony Xperia Z</article>
+            <a class="btn btn-primary pull-right marginBottom10" href="javascript:void(0)">Edit</a> 
+        </div>
+        <div class="col-md-12 blogShort">
+            <img style="width: 75px; height: 75px;" src="img/electronics/nokia920.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+            <article>Nokia L920</article>
+            <a class="btn btn-primary pull-right marginBottom10" href="javascript:void(0)">Edit</a> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-5 margin-bottom-20">
+            <button id="sellAnother" name="sellAnother" class="btn btn-primary">Sell another product</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#sellAnother").click(function() {
+            $("#page").load("templates/sellproduct.html");
+            $('body').scrollTop(0);
+        });
+        $("#editProdBtn").click(function() {
+            $("#page").load("templates/editproduct.html");
+            $('body').scrollTop(0);
+        });
+    });
+</script>

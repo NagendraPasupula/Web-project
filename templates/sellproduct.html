@@ -1,0 +1,133 @@
+<div class="">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-8">
+                <form class="form-horizontal" id="sellProdForm" action="javascript:void(0)">
+                    <fieldset>
+                        <!-- Form Name -->
+                        <legend>Post a product for sale</legend>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="title">Product Title</label>  
+                            <div class="col-md-4">
+                                <input id="title" name="title" type="text" placeholder="Title which shows on search" class="form-control input-md" required="">
+                            </div>
+                        </div>
+
+                        <!-- Textarea -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="descriptionText">Description</label>
+                            <div class="col-md-4">                     
+                                <textarea class="form-control" id="descriptionText" name="descriptionText" placeholder="You can also upload your text document"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- File Button --> 
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="descriptionFile"></label>
+                            <div class="col-md-4">
+                                <input id="descriptionFile" name="descriptionFile" class="input-file" type="file" accept="text/plain">
+                            </div>
+                        </div>
+
+                        <!-- File Button --> 
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="image">Upload Image</label>
+                            <div class="col-md-4">
+                                <input  id="image" name="image" class="input-file" type="file" accept="image/*">
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="minBidPrice">Minimum Bid Price</label>  
+                            <div class="col-md-4">
+                                <input id="minBidPrice" name="minBidPrice" type="text" placeholder="Starting bid price" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="endDate">Auction Ends On</label>  
+                            <div class="col-md-4">
+                                <input id="endDate" name="endDate" type="text" placeholder="mm/dd/yyyy" class="form-control input-md" required="">
+                                <span class="help-block">- Eg: "11/21/2014" for 21st Nov 2014</span>  
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="bidIncrement">Bid Increment</label>  
+                            <div class="col-md-4">
+                                <input id="bidIncrement" name="bidIncrement" type="text" placeholder="Minimum raise of bid price" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="clearBtn"></label>
+                            <div class="col-md-8">
+                                <input id="clearBtn" name="clearBtn" class="btn btn-primary" value="Clear" type="reset" />
+                                <input id="addBtn" name="addBtn" class="btn btn-primary" value="Add" type="submit"/>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <br><br>
+                <h4 class="text-center">Image Preview</h4>
+                <br>
+                <img id="imagePreview" class="logo" src="img/imageHolder.png" alt=""/>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<script>
+
+
+    $(document).ready(function() {
+        $("#endDate").datepicker();
+
+        var imageUrl;
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    imageUrl = e.target.result;
+                    console.log(e);
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#image").change(function(e) {
+            readURL(this);
+        });
+
+        $("#descriptionFile").change(function(e) {
+            $("#descriptionText").text("This is brand new apple phone.")
+        });
+
+        $("#sellProdForm").submit(function() {
+            var title = $("#title").val();
+            if ($("#image").val()) {
+                $("#page").load("templates/sellproductslist.html", function() {
+                    $(".iphoneadded").show();
+                    $(".iphoneadded img").attr('src', imageUrl);
+                    $(".iphoneadded p").text(title);
+                });
+            } else {
+                alert("Please upload an image for the product")
+                return;
+            }
+        });
+
+
+    });
+</script>

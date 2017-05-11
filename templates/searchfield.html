@@ -1,0 +1,165 @@
+<div class="container" style="background: #444; border-radius: 5px;
+     padding-bottom: 10px;
+     padding-top: 5px;">
+
+    <div class="row">
+        <div class="col-xs-2" style="
+             margin-top: 5px;">
+            <img class="logo" src="img/logo.png" alt=""/>
+        </div>
+        <div class="col-xs-10" style="padding-right: 35px;">
+            <div class="row" style="margin-top: 14px;">
+                <div class="input-group">
+                    <div class="input-group-btn iBidCategoryDropDown">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept">Search by Category</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#antiques">All Categories</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#antiques">Antiques (3)</a></li>
+                            <li><a href="#books">Books (1)</a></li>
+                            <li><a href="#housengarden">House & Garden (4)</a></li>
+                            <li><a href="#electronics">Electronics (5)</a></li>
+                            <li><a href="#healthnbeauty">Health & Beauty (3)</a></li>
+                            <li><a href="#jewelrynwatches">Jewelry & Watches (3)</a></li>
+                            <li><a href="#musicalinstruments">Musical Instruments (5)</a></li>
+                            <li><a href="#sportinggoods">Sporting Goods (4)</a></li>
+                            <li><a href="#toysnhobbies">Toys & Hobbies (3)</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#everythingelse">Everything Else (7)</a></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="search_param" value="all" id="search_param">         
+                    <input id="searchInput" type="text" class="form-control" name="x" placeholder="Search product...">
+                    <span class="input-group-btn">
+                        <button id="searchBtn" class="btn btn-default searchBtn" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $("#searchBtn").click(loadItems);
+
+    $('.iBidCategoryDropDown .dropdown-menu').find('a').click(function(e) {
+        e.preventDefault();
+        var param = $(this).attr("href").replace("#", "");
+        var concept = $(this).text();
+        $('.iBidCategoryDropDown span#search_concept').text(concept);
+        $('.input-group #search_param').val(param);
+    });
+
+    function loadItems(e) {
+        if ($("#searchInput").val()) {
+            loadingOverlay();
+            $("#page").load("templates/searchresult.html", function() {
+                var resultProducts = getSearchListItems();
+                if (!resultProducts.items.length) {
+                    $row = $("<div class='row' style='margin-top:20px;'></div>");
+                    $details = $("<div class='col-xs-12'></div>");
+                    $details.append("<h3>No product was found with the name '" + $("#searchInput").val() + "'</h3>");
+                    $row.append($details);
+                    $("#searchresholder").append($row);
+                    $("#searchresholder").append($("<hr>"));
+                }
+                $.each(resultProducts.items, function(index, item) {
+
+
+                    $row = $("<div class='row' style='margin-top:20px;'></div>");
+                    $image = $("<div class='col-xs-2'></div>");
+                    $image.append("<img class='logo' src='" + item.img + "' alt=''/>")
+                    $row.append($image);
+                    $details = $("<div class='details col-xs-6'></div>");
+                    $details.append("<h4 class='list-group-item-heading' ><a href='javascript:void(0)'>" + item.title + "</a></h4>");
+                    $details.append("<p class='list-group-item-text'>" + item.caption + "</p>");
+                    $details.append("<p class='list-group-item-text'></p>");
+                    $details.append("<p class='list-group-item-text'>" + item.soldsofar + "</p>");
+                    $details.append("<p class='list-group-item-text'>by</p>");
+                    $details.append("<p class='list-group-item-text'>" + item.seller + "</p>");
+                    $row.append($details);
+                    $right = $("<div class='col-md-3 text-center'></div>");
+                    console.log(item.currentBid);
+                    $right.append("<h3> $ <span class='currentBidHldr'>" + item.currentBid + "</span> </h3>");
+
+                    $right.append("<button class='bidNowBtnAll btn btn-primary btn-lg'><span class='glyphicon glyphicon-hand-right'></span> Bid now</button>");
+                    $stars = $("<div class='stars'></div>");
+                    $stars.append("<span class='glyphicon glyphicon-star'></span>");
+                    $stars.append("<span class='glyphicon glyphicon-star'></span>");
+                    $stars.append("<span class='glyphicon glyphicon-star'></span>");
+                    $stars.append("<span class='glyphicon glyphicon-star'></span>");
+                    $stars.append("<span class='glyphicon glyphicon-star-empty'></span>");
+
+                    $right.append($stars);
+                    $right.append("<p> Average 4.5 <small> / </small> 5 </p>");
+
+                    $row.append($right);
+
+                    $("#searchresholder").append($row);
+                    $("#searchresholder").append($("<hr>"));
+                });
+                removeOverlay();
+            });
+        } else {
+            alert("Enter any product name to search!!!");
+            return;
+        }
+
+    }
+
+    $("#searchInput").keyup(function(e) {
+        if (e.keyCode === 13 && e.which === 13) {
+            $("#searchBtn").trigger('click', true);
+        }
+    });
+
+    function getSearchListItems() {
+        var searchText = $("#searchInput").val().toLowerCase();
+        var resultItem = null;
+        for (var i = 0; i < data.categories.length; i++) {
+            var found = false;
+            if (!data.categories[i].items.length) {
+                var subcat = data.categories[i].subcat;
+                for (var j = 0; j < subcat.length; j++) {
+                    for (var k = 0; k < subcat[j].items.length; k++) {
+                        var subcatItem = subcat[j].items[k];
+                        var subcatItemTitle = subcatItem.title.toLowerCase();
+                        if (subcatItemTitle.search(searchText) != -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        resultItem = subcat[j];
+                        break;
+                    } else {
+                        resultItem = {"name": "", "items": []};
+                    }
+                }
+            } else {
+                var cat = data.categories[i].items;
+                for (var j = 0; j < cat.length; j++) {
+                    var catItemTitle = cat[j].title.toLowerCase();
+                    if (catItemTitle.search(searchText) != -1) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    resultItem = data.categories[i];
+                    break;
+                } else {
+                    resultItem = {"name": "", "items": []};
+                }
+            }
+        }
+        console.log(resultItem);
+        return resultItem;
+
+    }
+
+</script>

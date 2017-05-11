@@ -1,0 +1,148 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Login</h4>
+    </div>
+    <div class="modal-body">
+        <form id="lgnForm" class="form-horizontal" action="javascript:void(0)">
+
+
+            <!-- Text input-->
+            <div name="user" class="form-group">
+                <label class="col-md-4 control-label" for="user">E-mail:</label>  
+                <div class="col-md-6">
+                    <input id="user" name="user" type="text" placeholder="Enter your e-mail address" class="form-control input-md" required="">
+                    <span class="help-block">( or ) your user name</span>  
+                </div>
+            </div>
+
+            <!-- Password input-->
+            <div name="pass" class="form-group">
+                <label class="col-md-4 control-label" for="password">Password</label>
+                <div class="col-md-6">
+                    <input id="password" name="password" type="password" placeholder="" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-6">
+                    <a id="forgotPassword" href="javascript:void(0);">Forgot password?</a>
+                </div>
+                <label class="col-md-4 control-label" for="checkboxes"></label>
+                <div class="col-md-6">
+                    <div class="checkbox">
+                        <label for="checkboxes-0">
+                            <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+                            Stay signed in.
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <input id="btnSingIn" name="btnSingIn" type="submit" class="btn btn-primary" value="Sign in" />
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer loginFooter">
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <label class="col-md-3 control-label">New user?</label>
+                <label class="col-md-4 control-label"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <button id="btnReg" name="btnReg" type="button" class="btn btn-primary" >Register for free</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                ( or )
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2 text-center">
+                <img style="padding-left: 4px;" src="img/fb_login.png" >
+            </div>
+            <div class="col-md-4 text-center">
+                <img style="padding-left: 4px;" src="img/google_sign_in.png">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#lgnForm").submit(function() {
+            var username = $("#user").val();
+            var password = $("#password").val();
+            if (!username) {
+                alert("Please provide your username and password");
+                $("div[name='user']").addClass("has-error");
+                return;
+            } else {
+                $("div[name='user']").removeClass("has-error");
+            }
+            if (!password) {
+                alert("Please provide your password");
+                $("div[name='pass']").addClass("has-error");
+                return;
+            } else {
+                $("div[name='pass']").removeClass("has-error");
+            }
+
+
+            $.each(user, function(a, b) {
+                if (username === b.username || username === b.email) {
+                    console.log(b.username);
+                    console.log(b.password);
+                    if (password === b.password) {
+                        loadingOverlay();
+                        $.cookie("username", b.username);
+                        $.cookie("email", b.email);
+                        $.cookie("firstname", b.firstname);
+                        $.cookie("lastname", b.lastname);
+                        $.cookie("admin", b.admin);
+                        $("#loginModal").modal("hide");
+                        setTimeout(function() {
+                            window.location.href = window.location.origin + window.location.pathname;
+                        }, 500);
+                        removeOverlay();
+                        return;
+                    } else {
+                        alert("please enter the password correctly");
+                    }
+                }
+            });
+            if (!$.cookie("username")) {
+                alert("Invalid username or password. Please try again.");
+            }
+
+        });
+
+        $("#btnReg").click(function() {
+            $("#loginModal").modal("hide");
+            $("a[data-target='#regModal']").trigger('click');
+        });
+
+
+        $("#forgotPassword").click(function() {
+            var fgt = prompt("Please enter the e-mail address of your account");
+            if (fgt) {
+                alert("The password is reset successfully and sent to you account e-mail.");
+            } else {
+                return;
+            }
+        });
+
+    });
+</script>
