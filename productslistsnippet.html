@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-xs-3">
+        <ul id="simpleListId" role="nav nav-sidebar">
+            <li><a href="#all">All Categories</a></li>
+            <hr>
+            <li><a href="#antiques">Antiques (3)</a></li>
+            <li><a href="#ment" >Books (1)</a></li>
+            <li><a href="#housengarden">House & Garden (4)</a></li>
+            <li><a href="#electronics">Electronics (5)</a></li>
+            <li><a href="#healthnbeauty">Health & Beauty (3)</a></li>
+            <li><a href="#jewelrynwatches">Jewelry & Watches (3)</a></li>
+            <li><a href="#musicalinstruments">Musical Instruments (5)</a></li>
+            <li><a href="#sportinggoods">Sporting Goods (4)</a></li>
+            <li><a href="#toysnhobbies">Toys & Hobbies (3)</a></li>
+            <hr>
+            <li><a href="#everythingelse">Everything Else (7)</a></li>
+        </ul>
+    </div>
+    <!--    <div id="breadcrumb" class="col-xs-9">
+            <li><a href="#all">All Categories</a></li>
+            <a href="javascript:void(0)">Electronics</a>
+    
+        </div>-->
+    <div id="searchresholder" class="col-xs-9">
+
+    </div>
+</div>
+<script>
+       $(document).on("click", "#simpleListId li", function (e) {
+            e.preventDefault();
+            $("#simpleListId li").removeClass('activeLi');
+            $(this).addClass('activeLi');
+            var val = $(this).find("a").attr("href");
+            $("#searchresholder").load("templates/confirmation.html");
+        });
+        
+        $(document).onclick("#ment" ,function (e) {
+            e.preventDefault();
+            var val = $(this).find("a").attr("href");
+            $("#searchresholder").load("index.html");
+        }); 
+        //$("#searchresholder").load("templates/homepage.html");
+</script>

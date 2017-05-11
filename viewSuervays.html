@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    </head>
+    <body>
+        <div class="container , col-xs-7"  >
+
+        
+        <div class="container , col-xs-12 pull-right " >
+           
+
+            <ul class="pagination" id="myreview">
+                <li value = "one" ><input type="button" href="javascript:void(0)" value="1"/></li>
+                <li value = "two" ><input type="button" href="javascript:void(0)" value="2"/></li>
+                <li value = "three" ><input type="button" href="javascript:void(0)" value="3"/></li>
+                <li value = "four" ><input type="button" href="javascript:void(0)" value="4"/></li>
+            </ul>
+        </div>
+        <div class="container , col-xs-12" id="searchresholder2" >
+            </div>
+  </div>
+    </body>
+    <script>
+        $(document).on("click", "#myreview li", function (e) {
+            e.preventDefault();
+           //e.preventDefault();
+            $("#myreview li").removeClass('activeLi2');
+            $(this).addClass('activeLi2');
+            var val = $(this).attr("value");
+
+            // var vall = $(this).attr("href");
+            if (val === "one")
+            {
+               
+                $("#searchresholder2").load("review1.html");
+            }
+            
+             if (val === "two")
+            {
+               
+                $("#searchresholder2").load("revew2.html");
+            }
+              if (val === "three")
+            {
+               
+                $("#searchresholder2").load("review1.html");
+            }
+            
+             if (val === "four")
+            {
+               
+                $("#searchresholder2").load("revew2.html");
+            }
+        });
+    </script>
+</html>

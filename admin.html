@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-xs-3">
+        <ul id="simpleListId" role="nav nav-sidebar">
+            <li><a href="#all">DashBoard</a></li>
+            <hr>
+            <li><a href="#addanitem">Add An Item</a></li>
+            <li><a href="#updateproducts" >Update Products</a></li>
+            <li><a href="#updatePopular">Update Popular Products</a></li>
+            <li><a href="#HomeDeliver">Home Delivery Requests</a></li>
+            <li><a href="#editoffers">Edit Offers</a></li>
+            <li><a href="#viewsurveys">View Surveys</a></li>
+            <hr>
+        </ul>
+    </div>
+    <!--    <div id="breadcrumb" class="col-xs-9">
+            <li><a href="#all">All Categories</a></li>
+            <a href="javascript:void(0)">Electronics</a>
+    
+        </div>-->
+    <div class="container" id="searchresholder"  class="col-xs-9" >
+
+    </div>
+</div>
+<script>
+       $(document).on("click", "#simpleListId li", function (e) {
+            e.preventDefault();
+            $("#simpleListId li").removeClass('activeLi');
+            $(this).addClass('activeLi');
+            var val = $(this).find("a").attr("href");
+              
+          // var vall = $(this).attr("href");
+            if(val === "#addanitem")
+            {
+                 alert(val );
+            $("#searchresholder").load("addItem.jsp");
+        } if(val === "#updateproducts")
+        {   alert(val );
+            $("#searchresholder").load("UpdateanItem.jsp");
+        }
+       if ( val === "#HomeDeliver")
+            {  $("#searchresholder").load("HomeDelReq.jsp");
+               alert(val);
+        }
+         if ( val === "#updatePopular")
+            {  $("#searchresholder").load("UpdatePcat.jsp");
+               alert(val);
+        }
+            if ( val === "#editoffers")
+            {  $("#searchresholder").load("editOffer.jsp");
+               alert (val);
+        }
+          if ( val === "#viewsurveys")
+            {  $("#searchresholder").load("viewSuervays.html");
+               alert (val);
+        }
+         
+            
+        });
+        
+        
+        //$("#searchresholder").load("templates/homepage.html");
+</script>
